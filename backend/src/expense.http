@@ -1,0 +1,87 @@
+### obtener gastos de un grupo (cambiar groupId por uno real)
+GET http://localhost:3000/expenses?groupId=acd95375-aa10-47af-8044-8730c3a67f0f
+
+### obtener gasto específico
+GET http://localhost:3000/expenses/expense-1
+
+### crear un nuevo gasto
+POST http://localhost:3000/expenses
+Content-Type: application/json
+
+{
+    "description": "Cena en parrilla",
+    "amount": 2500.00,
+    "date": "2025-08-06",
+    "paid_by": "08441727-38cb-44d7-84f4-8da0815075f1",
+    "group_id": "acd95375-aa10-47af-8044-8730c3a67f0f"
+}
+
+### crear otro gasto
+POST http://localhost:3000/expenses
+Content-Type: application/json
+
+{
+    "description": "Uber al aeropuerto",
+    "amount": 850.50,
+    "date": "2025-08-05",
+    "paid_by": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "group_id": "group-1"
+}
+
+### actualizar gasto
+PUT http://localhost:3000/expenses/expense-1
+Content-Type: application/json
+
+{
+    "description": "Cena en restaurante - Actualizada",
+    "amount": 1800.00
+}
+
+### obtener gastos de un usuario en un grupo específico
+GET http://localhost:3000/expenses/user/f47ac10b-58cc-4372-a567-0e02b2c3d479/group/group-1
+
+### eliminar gasto (solo quien lo pagó o admin)
+DELETE http://localhost:3000/expenses/expense-1
+Content-Type: application/json
+
+{
+    "userId": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+}
+
+### probar error - gasto inexistente
+GET http://localhost:3000/expenses/gasto-inexistente
+
+### probar error - falta groupId query param
+GET http://localhost:3000/expenses
+
+### probar error - campos faltantes
+POST http://localhost:3000/expenses
+Content-Type: application/json
+
+{
+    "description": "Gasto incompleto"
+}
+
+### probar error - monto inválido
+POST http://localhost:3000/expenses
+Content-Type: application/json
+
+{
+    "description": "Gasto con monto inválido",
+    "amount": -100,
+    "date": "2025-08-06",
+    "paid_by": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "group_id": "group-1"
+}
+
+### probar error - usuario no es miembro del grupo
+POST http://localhost:3000/expenses
+Content-Type: application/json
+
+{
+    "description": "Gasto de usuario no miembro",
+    "amount": 500,
+    "date": "2025-08-06",
+    "paid_by": "usuario-inexistente",
+    "group_id": "group-1"
+}

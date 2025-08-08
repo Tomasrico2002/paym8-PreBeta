@@ -1,0 +1,47 @@
+### obtener todos los users
+GET http://localhost:3000/users
+
+### obtener un user específico
+GET http://localhost:3000/users/user-1
+
+### crear un nuevo user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name": "Ana Martinez",
+    "email": "ana2@email.com",
+    "password": "123456"
+}
+
+
+### actualizar un user (cambiar nombre)
+PUT http://localhost:3000/users/user-1
+Content-Type: application/json
+
+{
+    "name": "Juan Carlos Perez Actualizado",
+    "email": "JuanCarlosPerez@email.com"
+}
+
+
+### eliminar un user
+DELETE http://localhost:3000/users/user-2
+
+### probar error - email duplicado
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name": "Usuario Duplicado",
+    "email": "juan@email.com",
+    "password": "test123"
+}
+
+### probar error - campos faltantes
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name": "Usuario Incompleto"
+}

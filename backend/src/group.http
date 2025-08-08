@@ -1,0 +1,56 @@
+### obtener grupos del usuario (cambiar el userId por uno real)
+GET http://localhost:3000/groups?userId=08441727-38cb-44d7-84f4-8da0815075f1
+
+### obtener grupo específico
+GET http://localhost:3000/groups/group-1
+
+### crear un nuevo grupo
+POST http://localhost:3000/groups
+Content-Type: application/json
+
+{
+    "name": "Grupo de Prueba",
+    "description": "Mi primer grupo creado desde API",
+    "created_by": "58069640-630a-4007-8297-f8e48312e71f"
+}
+
+### actualizar grupo
+PUT http://localhost:3000/groups/group-1
+Content-Type: application/json
+
+{
+    "name": "Viaje a Bariloche - Actualizado",
+    "description": "Descripción actualizada del viaje"
+}
+
+### agregar miembro al grupo
+POST http://localhost:3000/groups/group-1/members
+Content-Type: application/json
+
+{
+    "user_id": "08441727-38cb-44d7-84f4-8da0815075f1",
+    "role": "member",
+    "requestedBy": "58069640-630a-4007-8297-f8e48312e71f"
+}
+
+### remover miembro del grupo
+DELETE http://localhost:3000/groups/group-1/members/08441727-38cb-44d7-84f4-8da0815075f1
+Content-Type: application/json
+
+{
+    "requestedBy": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+}
+
+### eliminar grupo
+DELETE http://localhost:3000/groups/group-1
+Content-Type: application/json
+
+{
+    "userId": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+}
+
+### probar error - grupo inexistente
+GET http://localhost:3000/groups/grupo-inexistente
+
+### probar error - falta userId query param
+GET http://localhost:3000/groups
